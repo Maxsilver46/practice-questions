@@ -1,38 +1,171 @@
-// even numbers [1, 2, 3, 4, 5] => [2, 4]
-const filterEvenNumbers = function (numbers) { };
+const isPostedInLast7Days = function (user) {
+  const dateArray = user.lastPostDate.split('-');
 
-// words with more than 5 letters ["apple", "banana", "kiwi", "grape"] => ["banana"]
-const filterLongWords = function (words) { };
+  return +dateArray[1] === 12 && (+dateArray[2] <= 21 || +dateArray[2] >= 14);
+};
 
-// people older than 30 [{name: "Alice", age: 25}, {name: "Bob", age: 35}] => [{name: "Bob", age: 35}]
-const filterAdults = function (people) { };
+const isOrderPlacedInLast30Days = function (order) {
+  const dateArray = order.orderDate.split('-');
 
-// active users [{username: "alice", active: true}, {username: "bob", active: false}] => [{username: "alice", active: true}]
-const filterActiveUsers = function (users) { };
+  if (+dateArray[1] === 11) {
+    return +dateArray[2] >= 21;
+  }
 
-// numbers greater than 10 [5, 12, 7, 18, 3] => [12, 18]
-const filterNumbersGreaterThanTen = function (numbers) { };
+  return +dateArray[1] === 12 && +dateArray[2] <= 21;
+};
 
-// books with more than 200 pages [{title: "Book 1", pages: 150}, {title: "Book 2", pages: 250}] => [{title: "Book 2", pages: 250}]
-const filterLongBooks = function (books) { };
+const isActive = function (person) {
+  return person.active;
+};
 
-// users with incomplete profiles [{username: "alice", profileComplete: true}, {username: "bob", profileComplete: false}] => [{username: "bob", profileComplete: false}]
-const filterIncompleteProfiles = function (users) { };
+const isGreaterThanLimit = function (number, limit) {
+  return number > limit;
+};
 
-// students with grades above 80 [{name: "John", grade: 75}, {name: "Jane", grade: 85}] => [{name: "Jane", grade: 85}]
-const filterHighGrades = function (students) { };
+const isEven = function (number) {
+  return number % 2 === 0;
+};
 
-// products that are in stock [{product: "apple", inStock: true}, {product: "banana", inStock: false}] => [{product: "apple", inStock: true}]
-const filterInStockProducts = function (products) { };
+//===============================> Practice <===============================
 
-// orders placed in the last 30 days [{orderDate: "2024-11-01"}, {orderDate: "2024-12-01"}] => [{orderDate: "2024-12-01"}]
-const filterRecentOrders = function (orders) { };
+// 1 ---------------------------- Filter Even Numbers ----------------------------
 
-// products with a price lower than the average [{name: "item1", price: 10}, {name: "item2", price: 20}, {name: "item3", price: 5}] => [{name: "item1", price: 10}, {name: "item3", price: 5}]
-const filterBelowAveragePrice = function (products) { };
+// const numbers = [2, 3, 1, 4, 5, 9];
 
-// active users who posted in the last 7 days [{username: "alice", lastPostDate: "2024-12-01", active: true}, {username: "bob", lastPostDate: "2024-11-20", active: true}] => [{username: "alice", lastPostDate: "2024-12-01", active: true}]
-const filterRecentActiveUsers = function (users) { };
+const filterEvenNumbers = function (numbers) {
+  return numbers.filter(isEven);
+};
+
+// 2 ---------------------------- Filter Long Words ----------------------------
+
+// const words = ['red', 'brown', 'blue', 'orange'];
+
+const filterLongWords = function (words) {
+  return words.filter((word) => {
+    return isGreaterThanLimit(word.length, 5);
+  });
+};
+
+// 3 ---------------------------- Filter Adults ----------------------------
+
+// const people = [{ name: "Alice", age: 25 }, { name: "Bob", age: 35 }];
+
+const filterAdults = function (people) {
+  return people.filter((person) => {
+    return isGreaterThanLimit(person.age, 30);
+  });
+};
+
+// 4 ---------------------------- Filter Active Users ----------------------------
+
+// const users = [{ name: "Benny", active: true }, { name: "Bob", active: false }];
+
+const filterActiveUsers = function (users) {
+  return users.filter(isActive);
+};
+
+// 5 ---------------------------- Filter Numbers Greater Than Ten ----------------------------
+
+// const numbers = [1, 3, 4, 2, 5, 6, 12, 32];
+
+const filterNumbersGreaterThanTen = function (numbers) {
+  return numbers.filter((number) => {
+    return isGreaterThanLimit(number, 10);
+  });
+};
+
+// 6 ---------------------------- Filter Long Books ----------------------------
+
+// const books = [{ title: "Book 1", pages: 150 }, { title: "Book 2", pages: 250 }];
+
+const filterLongBooks = function (books) {
+  return books.filter((book) => {
+    return isGreaterThanLimit(book.pages, 200);
+  });
+};
+
+// 7 ---------------------------- Filter Incomplete Profiles ----------------------------
+
+// const users = [{ username: "alice", profileComplete: true }, { username: "bob", profileComplete: false }];
+
+const filterIncompleteProfiles = function (users) {
+  return users.filter((user) => {
+    return !user.profileComplete;
+  });
+};
+
+// 8 ---------------------------- Filter High Grades ----------------------------
+
+// const students = [{ name: "John", grade: 75 }, { name: "Jane", grade: 85 }];
+
+const filterHighGrades = function (students) {
+  return students.filter((student) => {
+    return isGreaterThanLimit(student.grade, 80);
+  });
+};
+
+// 9 ---------------------------- Filter InStock Products ----------------------------
+
+// const products = [{ product: "apple", inStock: true }, { product: "banana", inStock: false }];
+
+const filterInStockProducts = function (products) {
+  return products.filter((product) => {
+    return product.inStock;
+  });
+};
+
+// 10 ---------------------------- Filter Recent Orders ----------------------------
+
+// const orders = [{ orderDate: "2024-11-01" }, { orderDate: "2024-12-01" }];
+
+const filterRecentOrders = function (orders) {
+  return orders.filter(isOrderPlacedInLast30Days);
+};
+
+// 11 ---------------------------- Filter  ----------------------------
+
+const products = [{ name: "item1", price: 10 }, { name: "item2", price: 20 }, { name: "item3", price: 5 }];
+
+const sum = function (number1, number2) {
+  return number1 + number2;
+};
+
+const filterBelowAveragePrice = function (products) {
+  const priceSum = products.reduce(sum, 0);
+  const averagePrice = priceSum / products.length;
+
+  return products.filter((product) => {
+    return product.price < averagePrice;
+  });
+};
+
+// 12 ---------------------------- Filter  ----------------------------
+
+const users = [
+  { username: "alice", lastPostDate: "2024-12-19", active: true },
+  { username: "bob", lastPostDate: "2024-11-20", active: true }
+];
+
+const filterRecentActiveUsers = function (users) {
+  const activeUsers = users.filter(isActive);
+
+  return activeUsers.filter(isPostedInLast7Days);
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // students who passed all subjects [{name: "John", subjects: [{name: "Math", passed: true}, {name: "Science", passed: true}]}, {name: "Jane", subjects: [{name: "Math", passed: false}, {name: "Science", passed: true}]}] => [{name: "John", subjects: [{name: "Math", passed: true}, {name: "Science", passed: true}]}]
 const filterStudentsWithAllSubjectsPassed = function (students) { };
@@ -215,13 +348,13 @@ const filterUsersByPostComments = function (users, minComments) { };
 const filterUsersByPostCategory = function (users, category) { };
 
 // Filter users who have a certain number of followers and have posted in the last 30 days [{user: {name: "Tom", followers: 1000, lastPostDate: "2024-11-10"}}] => [{user: {name: "Tom", followers: 1000, lastPostDate: "2024-11-10"}}]
-const filterActiveUsers = function (users, minFollowers, daysAgo) { };
+const filterActiveUsers2 = function (users, minFollowers, daysAgo) { };
 
 // Filter posts that have at least one hashtag from a list of trending hashtags [{post: {title: "Post 1", hashtags: ["#food", "#vegan"]}}] => [{post: {title: "Post 1", hashtags: ["#food", "#vegan"]}}]
 const filterPostsByHashtags = function (posts, trendingHashtags) { };
 
 // Filter users who have shared at least one post that received a specific number of likes [{user: {name: "Lucy", posts: [{title: "Post 1", likes: 500}, {title: "Post 2", likes: 100}]}}] => [{user: {name: "Lucy", posts: [{title: "Post 1", likes: 500}, {title: "Post 2", likes: 100}]}}]
-const filterUsersByPostLikes = function (users, minLikes) { };
+const filterUsersByPostLikes2 = function (users, minLikes) { };
 
 // Filter posts that have a certain number of comments and are from a specific location [{post: {title: "Post 1", comments: 150, location: "Paris"}}] => [{post: {title: "Post 1", comments: 150, location: "Paris"}}]
 const filterPostsByCommentsAndLocation = function (posts, minComments, location) { };
