@@ -1,32 +1,44 @@
-const isPostedInLast7Days = function (user) {
-  const dateArray = user.lastPostDate.split('-');
-
-  return +dateArray[1] === 12 && (+dateArray[2] <= 21 || +dateArray[2] >= 14);
+const add = function (number1, number2) {
+  return number1 + number2;
 };
 
-const isOrderPlacedInLast30Days = function (order) {
-  const dateArray = order.orderDate.split('-');
+const average = function (elements) {
+  const sum = elements.reduce(add, 0);
 
-  if (+dateArray[1] === 11) {
-    return +dateArray[2] >= 21;
-  }
-
-  return +dateArray[1] === 12 && +dateArray[2] <= 21;
+  return sum / elements.length;
 };
 
-const isActive = function (person) {
-  return person.active;
+const isSame = function (value1, value2) {
+  return value1 === value2;
 };
 
 const isGreaterThanLimit = function (number, limit) {
   return number > limit;
 };
 
+const complement = function (fn) {
+  return function (...args) {
+    return !fn(...args);
+  };
+};
+
+const compareElementInArray = function (threshold, predicate) {
+  return function (element) {
+    return predicate(element, threshold);
+  };
+};
+
+const compareValues = function (threshold, attribute, predicate) {
+  return function (element) {
+    return predicate(element[attribute], threshold);
+  };
+};
+
 const isEven = function (number) {
   return number % 2 === 0;
 };
 
-//===============================> Practice <===============================
+//==================================> Practice <==================================
 
 // 1 ---------------------------- Filter Even Numbers ----------------------------
 
@@ -41,8 +53,10 @@ const filterEvenNumbers = function (numbers) {
 // const words = ['red', 'brown', 'blue', 'orange'];
 
 const filterLongWords = function (words) {
+  const isLengthGreaterThan5 = compareElementInArray(5, isGreaterThanLimit);
+
   return words.filter((word) => {
-    return isGreaterThanLimit(word.length, 5);
+    return isLengthGreaterThan5(word.length);
   });
 };
 
@@ -51,16 +65,21 @@ const filterLongWords = function (words) {
 // const people = [{ name: "Alice", age: 25 }, { name: "Bob", age: 35 }];
 
 const filterAdults = function (people) {
-  return people.filter((person) => {
-    return isGreaterThanLimit(person.age, 30);
-  });
+  const isOlderThan30 = compareValues(30, 'age', isGreaterThanLimit);
+
+  return people.filter(isOlderThan30);
 };
 
 // 4 ---------------------------- Filter Active Users ----------------------------
 
-// const users = [{ name: "Benny", active: true }, { name: "Bob", active: false }];
+// const users = [
+//   { name: "Benny", active: true },
+//   { name: "Bob", active: false }
+// ];
 
 const filterActiveUsers = function (users) {
+  const isActive = compareValues(true, 'active', isSame);
+
   return users.filter(isActive);
 };
 
@@ -69,54 +88,76 @@ const filterActiveUsers = function (users) {
 // const numbers = [1, 3, 4, 2, 5, 6, 12, 32];
 
 const filterNumbersGreaterThanTen = function (numbers) {
-  return numbers.filter((number) => {
-    return isGreaterThanLimit(number, 10);
-  });
+  const isGreaterThan10 = compareElementInArray(10, isGreaterThanLimit);
+
+  return numbers.filter(isGreaterThan10);
 };
 
 // 6 ---------------------------- Filter Long Books ----------------------------
 
-// const books = [{ title: "Book 1", pages: 150 }, { title: "Book 2", pages: 250 }];
+// const books = [
+//   { title: "Book 1", pages: 150 },
+//   { title: "Book 2", pages: 250 }
+// ];
 
 const filterLongBooks = function (books) {
-  return books.filter((book) => {
-    return isGreaterThanLimit(book.pages, 200);
-  });
+  const isPagesMoreThan200 = compareValues(200, 'pages', isGreaterThanLimit);
+
+  return books.filter(isPagesMoreThan200);
 };
 
 // 7 ---------------------------- Filter Incomplete Profiles ----------------------------
 
-// const users = [{ username: "alice", profileComplete: true }, { username: "bob", profileComplete: false }];
+// const users = [
+//   { username: "alice", profileComplete: true },
+//   { username: "bob", profileComplete: false }
+// ];
 
 const filterIncompleteProfiles = function (users) {
-  return users.filter((user) => {
-    return !user.profileComplete;
-  });
+  const isIncomplete = compareValues(false, 'profileComplete', isSame);
+
+  return users.filter(isIncomplete);
 };
 
 // 8 ---------------------------- Filter High Grades ----------------------------
 
-// const students = [{ name: "John", grade: 75 }, { name: "Jane", grade: 85 }];
+// const students = [
+//   { name: "John", grade: 75 },
+//   { name: "Jane", grade: 85 }
+// ];
 
 const filterHighGrades = function (students) {
-  return students.filter((student) => {
-    return isGreaterThanLimit(student.grade, 80);
-  });
+  const isGradeAbove80 = compareValues(80, 'grade', isGreaterThanLimit);
+
+  return students.filter(isGradeAbove80);
 };
 
 // 9 ---------------------------- Filter InStock Products ----------------------------
 
-// const products = [{ product: "apple", inStock: true }, { product: "banana", inStock: false }];
+// const products = [
+//   { product: "apple", inStock: true },
+//   { product: "banana", inStock: false }
+// ];
 
 const filterInStockProducts = function (products) {
-  return products.filter((product) => {
-    return product.inStock;
-  });
+  const isProductInStock = compareValues(true, 'inStock', isSame);
+
+  return products.filter(isProductInStock);
 };
 
 // 10 ---------------------------- Filter Recent Orders ----------------------------
 
 // const orders = [{ orderDate: "2024-11-01" }, { orderDate: "2024-12-01" }];
+
+const isOrderPlacedInLast30Days = function (order) {
+  const dateArray = order.orderDate.split('-');
+
+  if (+dateArray[1] === 11) {
+    return +dateArray[2] >= 21;
+  }
+
+  return +dateArray[1] === 12 && +dateArray[2] <= 21;
+};
 
 const filterRecentOrders = function (orders) {
   return orders.filter(isOrderPlacedInLast30Days);
@@ -124,29 +165,39 @@ const filterRecentOrders = function (orders) {
 
 // 11 ---------------------------- Filter  ----------------------------
 
-const products = [{ name: "item1", price: 10 }, { name: "item2", price: 20 }, { name: "item3", price: 5 }];
-
-const sum = function (number1, number2) {
-  return number1 + number2;
-};
+// const products = [
+//   { name: "item1", price: 10 },
+//   { name: "item2", price: 20 },
+//   { name: "item3", price: 5 },
+//   { name: "item4", price: 7 }
+// ];
 
 const filterBelowAveragePrice = function (products) {
-  const priceSum = products.reduce(sum, 0);
-  const averagePrice = priceSum / products.length;
-
-  return products.filter((product) => {
-    return product.price < averagePrice;
+  const prices = products.map(function (product) {
+    return product.price;
   });
+
+  const isLessThanLimit = complement(isGreaterThanLimit);
+  const isLessThan = compareValues(average(prices), 'price', isLessThanLimit);
+
+  return products.filter(isLessThan);
 };
 
 // 12 ---------------------------- Filter  ----------------------------
 
-const users = [
-  { username: "alice", lastPostDate: "2024-12-19", active: true },
-  { username: "bob", lastPostDate: "2024-11-20", active: true }
-];
+// const users = [
+//   { username: "alice", lastPostDate: "2024-12-19", active: true },
+//   { username: "bob", lastPostDate: "2024-11-20", active: true }
+// ];
+
+const isPostedInLast7Days = function (user) {
+  const dateArray = user.lastPostDate.split('-');
+
+  return +dateArray[1] === 12 && (+dateArray[2] <= 21 || +dateArray[2] >= 14);
+};
 
 const filterRecentActiveUsers = function (users) {
+  const isActive = compareValues(true, 'active', isSame);
   const activeUsers = users.filter(isActive);
 
   return activeUsers.filter(isPostedInLast7Days);
