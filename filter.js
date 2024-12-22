@@ -55,7 +55,7 @@ const filterEvenNumbers = function (numbers) {
 const filterLongWords = function (words) {
   const isLengthGreaterThan5 = compareElementInArray(5, isGreaterThanLimit);
 
-  return words.filter((word) => {
+  return words.filter(function (word) {
     return isLengthGreaterThan5(word.length);
   });
 };
@@ -163,7 +163,7 @@ const filterRecentOrders = function (orders) {
   return orders.filter(isOrderPlacedInLast30Days);
 };
 
-// 11 ---------------------------- Filter  ----------------------------
+// 11 ---------------------------- Filter Below Average Price ----------------------------
 
 // const products = [
 //   { name: "item1", price: 10 },
@@ -183,7 +183,7 @@ const filterBelowAveragePrice = function (products) {
   return products.filter(isLessThan);
 };
 
-// 12 ---------------------------- Filter  ----------------------------
+// 12 ---------------------------- Filter Recent Active Users ----------------------------
 
 // const users = [
 //   { username: "alice", lastPostDate: "2024-12-19", active: true },
