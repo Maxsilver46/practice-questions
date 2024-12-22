@@ -1,34 +1,140 @@
-// squares of [1, 2, 3] => [1, 4, 9]
-const squaresOf = function (numbers) { };
+//==================================> Practice <==================================
 
-// lengths of ["apple", "banana", "kiwi"] => [5, 6, 4]
-const lengthsOf = function (strings) { };
+// 1 ---------------------------- Squares Of Numbers ----------------------------
 
-// uppercase of ["hello", "world"] => ["HELLO", "WORLD"]
-const uppercaseOf = function (strings) { };
+// const numbers = [1, 2, 3];
 
-// first characters of ["apple", "banana", "kiwi"] => ["a", "b", "k"]
-const firstCharactersOf = function (strings) { };
+const squaresOfNumber = function (number) {
+  return number * number;
+};
 
-// truth values of [0, 1, 2, 3] => [false, true, true, true]
-// Assume non-zero numbers are true, and zero is false
-const truthValuesOf = function (numbers) { };
+const squaresOf = function (numbers) {
+  return numbers.map(squaresOfNumber);
+};
 
-// reverse strings of ["hello", "world"] => ["olleh", "dlrow"]
-const reversedStringsOf = function (strings) { };
+// 2 ---------------------------- Lengths Of Strings ----------------------------
 
-// double letters of ["cat", "dog", "bat"] => ["ccaat", "ddoog", "bbaatt"]
-const doubleLettersOf = function (strings) { };
+// const fruits = ["apple", "banana", "kiwi"];
 
-// boolean negation of [true, false, true] => [false, true, false]
-const negatedBooleansOf = function (booleans) { };
+const lengthOfString = function (string) {
+  return string.length;
+};
 
-// character codes of ["a", "b", "c"] => [97, 98, 99]
-// Use the `charCodeAt` method on each string
-const charCodesOf = function (strings) { };
+const lengthsOf = function (strings) {
+  return strings.map(lengthOfString);
+};
 
-// extract domain names from ["user1@gmail.com", "admin@yahoo.com"] => ["gmail.com", "yahoo.com"]
-const domainNamesOf = function (emails) { };
+// 3 ---------------------------- Strings To UpperCase ----------------------------
+
+// const words = ["hello", "world"];
+
+const toUpperCase = function (string) {
+  return string.toUpperCase();
+};
+
+const uppercaseOf = function (strings) {
+  return strings.map(toUpperCase);
+};
+
+// 4 ---------------------------- First Characters Of Strings ----------------------------
+
+// const fruits = ["apple", "banana", "kiwi"];
+
+const firstCharacter = function (string) {
+  return string[0];
+};
+
+const firstCharactersOf = function (strings) {
+  return strings.map(firstCharacter);
+};
+
+// 5 ---------------------------- Truth Values Of Numbers ----------------------------
+
+// const numbers = [0, 1, 2, 3];
+
+const truthyOrFalsy = function (number) {
+  return number !== 0;
+};
+
+const truthValuesOf = function (numbers) {
+  return numbers.map(truthyOrFalsy);
+};
+
+// 6 ---------------------------- Reverse Of String ----------------------------
+
+// const words = ["hello", "world"];
+
+const reverseOfString = function (string) {
+  return [...string].reverse().join('');
+};
+
+const reversedStringsOf = function (strings) {
+  return strings.map(reverseOfString);
+};
+
+// 7 ---------------------------- Double Letters Of String ----------------------------
+
+// const words = ["cat", "dog", "bat"];
+
+const doubleLettersInString = function (string) {
+  let repeatedLettersString = '';
+
+  for (const letter of string) {
+    repeatedLettersString += letter + letter;
+  }
+
+  return repeatedLettersString;
+};
+
+const doubleLettersOf = function (strings) {
+  return strings.map(doubleLettersInString);
+};
+
+// 8 ---------------------------- Negative Booleans ----------------------------
+
+// const booleans = [true, false, true];
+
+const negatedBooleansOf = function (booleans) {
+  return booleans.map(function (boolean) {
+    return !boolean;
+  });
+};
+
+// 9 ---------------------------- Char Code of Character ----------------------------
+
+// const characterArray = ["a", "b", "c"];
+
+const charCodeOf = function (character) {
+  return character.charCodeAt();
+};
+
+const charCodesOf = function (strings) {
+  return strings.map(charCodeOf);
+};
+
+// 10 ---------------------------- Get Domain Of Email ----------------------------
+
+// const emails = ["user1@gmail.com", "admin@yahoo.com"];
+
+const getDomain = function (email) {
+  return email.split('@').at(-1);
+};
+
+const domainNamesOf = function (emails) {
+  return emails.map(getDomain);
+};
+
+
+
+
+
+
+
+
+
+
+
+
 
 // split words in ["hello world", "goodbye moon"] => [["hello", "world"], ["goodbye", "moon"]]
 const splitWordsOf = function (strings) { };
