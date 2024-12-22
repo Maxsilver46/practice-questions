@@ -4,12 +4,12 @@
 
 // const numbers = [1, 2, 3];
 
-const squaresOfNumber = function (number) {
+const square = function (number) {
   return number * number;
 };
 
 const squaresOf = function (numbers) {
-  return numbers.map(squaresOfNumber);
+  return numbers.map(square);
 };
 
 // 2 ---------------------------- Lengths Of Strings ----------------------------
