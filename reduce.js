@@ -6,10 +6,10 @@ const multiply = function (number1, number2) {
   return number1 * number2;
 };
 
-const average = function (elements) {
-  const sum = elements.reduce(add, 0);
+const average = function (numbers) {
+  const sum = numbers.reduce(add, 0);
 
-  return sum / elements.length;
+  return sum / numbers.length;
 };
 
 const square = function (number) {
@@ -30,7 +30,7 @@ const complement = function (fn) {
   };
 };
 
-const isNotPositive = complement(isPositive);
+const isNegative = complement(isPositive);
 
 const isEven = complement(isOdd);
 
@@ -113,7 +113,7 @@ const sumOfOddNumbers = function (numbers) {
 // const numbers = [1, -3, -2, 3, -4];
 
 const counter = function (count, number) {
-  return isNotPositive(number) ? count + 1 : count;
+  return isNegative(number) ? count + 1 : count;
 };
 
 const countNegativeNumbers = function (numbers) {

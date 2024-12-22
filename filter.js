@@ -2,10 +2,10 @@ const add = function (number1, number2) {
   return number1 + number2;
 };
 
-const average = function (elements) {
-  const sum = elements.reduce(add, 0);
+const average = function (numbers) {
+  const sum = numbers.reduce(add, 0);
 
-  return sum / elements.length;
+  return sum / numbers.length;
 };
 
 const isSame = function (value1, value2) {
